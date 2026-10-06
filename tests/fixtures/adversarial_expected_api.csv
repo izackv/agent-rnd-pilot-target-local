@@ -1,0 +1,20 @@
+id,title,owner,rows
+3,Payroll summary,finance,310
+11,"Signup funnel, weekly",growth,5200
+12,"Q3 ""peak"" load",sre,48
+13,"Line1
+Line2",ops,7
+14,"Header
+Footer",ops,8
+15,"AB",ops,9
+16,"Ärende, Södertälje",södertälje,2
+17,表单 📊,ops,5
+18,  spaced  ,ops,1
+19,,,0
+20,'=1+1,ops,15
+21,'+1,ops,12
+22,'-1,ops,9
+23,'@x,ops,8
+24,'=cmd|'/c calc'!A0,ops,25
+25,"'=HYPERLINK(""http://x"",""y"")",ops,5
+26,	=1+1,ops,9
