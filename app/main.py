@@ -10,7 +10,7 @@ from fastapi.responses import HTMLResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 
-from app import data, fixtures
+from app import csv_export, data
 
 BASE = Path(__file__).parent
 app = FastAPI(title="pilot-target", version="0.1.0")
@@ -35,15 +35,15 @@ def api_reports(x_role: str | None = Header(default=None)) -> list[dict]:
 
 @app.get("/api/reports.csv")
 def api_reports_csv(x_role: str | None = Header(default=None)) -> Response:
-    """Contract stub (contract v0.2 §1.1, §2, §8): per-role frozen fixture bytes.
+    """CSV export (contract v0.2 §1.1, §2, §§3–7): the real engine, no fixtures.
 
-    Role derivation reuses `_role()` verbatim, so a missing/other `X-Role`
-    behaves exactly like today's list endpoint (absent ⇒ viewer). The real
-    CSV generation engine is a separate backend issue; this route only serves
-    the frozen fixture constants.
+    Role derivation reuses `_role()` and the row set reuses `data.list_reports()`
+    verbatim — the same source and filter function as the JSON list route, so
+    the export set always equals the caller's current list visibility (§5.1,
+    C-2). The body is batched in memory before the response exists (§7), so a
+    generation failure is a plain framework 500 with zero CSV bytes (§6 E-8).
     """
-    is_admin = _role(x_role) == data.ROLE_ADMIN
-    body = fixtures.CSV_ADMIN_BYTES if is_admin else fixtures.CSV_VIEWER_BYTES
+    body = csv_export.render_csv_bytes(data.list_reports(_role(x_role)))
     filename = f"reports-{datetime.now(UTC).date().isoformat()}.csv"
     return Response(
         content=body,
