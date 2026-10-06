@@ -1,0 +1,191 @@
+{
+ "records": [
+  {
+   "id": 3,
+   "title": "Payroll summary",
+   "owner": "finance",
+   "rows": 310,
+   "restricted": true,
+   "export": {
+    "title": "Payroll summary",
+    "owner": "finance"
+   }
+  },
+  {
+   "id": 11,
+   "title": "Signup funnel, weekly",
+   "owner": "growth",
+   "rows": 5200,
+   "restricted": false,
+   "export": {
+    "title": "Signup funnel, weekly",
+    "owner": "growth"
+   }
+  },
+  {
+   "id": 12,
+   "title": "Q3 \"peak\" load",
+   "owner": "sre",
+   "rows": 48,
+   "restricted": false,
+   "export": {
+    "title": "Q3 \"peak\" load",
+    "owner": "sre"
+   }
+  },
+  {
+   "id": 13,
+   "title": "Line1\nLine2",
+   "owner": "ops",
+   "rows": 7,
+   "restricted": false,
+   "export": {
+    "title": "Line1\nLine2",
+    "owner": "ops"
+   }
+  },
+  {
+   "id": 14,
+   "title": "Header\r\nFooter",
+   "owner": "ops",
+   "rows": 8,
+   "restricted": false,
+   "export": {
+    "title": "Header\r\nFooter",
+    "owner": "ops"
+   }
+  },
+  {
+   "id": 15,
+   "title": "A\rB",
+   "owner": "ops",
+   "rows": 9,
+   "restricted": false,
+   "export": {
+    "title": "A\rB",
+    "owner": "ops"
+   }
+  },
+  {
+   "id": 16,
+   "title": "Ärende, Södertälje",
+   "owner": "södertälje",
+   "rows": 2,
+   "restricted": false,
+   "export": {
+    "title": "Ärende, Södertälje",
+    "owner": "södertälje"
+   }
+  },
+  {
+   "id": 17,
+   "title": "表单 📊",
+   "owner": "ops",
+   "rows": 5,
+   "restricted": false,
+   "export": {
+    "title": "表单 📊",
+    "owner": "ops"
+   }
+  },
+  {
+   "id": 18,
+   "title": "  spaced  ",
+   "owner": "ops",
+   "rows": 1,
+   "restricted": false,
+   "export": {
+    "title": "  spaced  ",
+    "owner": "ops"
+   }
+  },
+  {
+   "id": 19,
+   "title": "",
+   "owner": "",
+   "rows": 0,
+   "restricted": false,
+   "export": {
+    "title": "",
+    "owner": ""
+   }
+  },
+  {
+   "id": 20,
+   "title": "=1+1",
+   "owner": "ops",
+   "rows": 15,
+   "restricted": false,
+   "export": {
+    "title": "'=1+1",
+    "owner": "ops"
+   }
+  },
+  {
+   "id": 21,
+   "title": "+1",
+   "owner": "ops",
+   "rows": 12,
+   "restricted": false,
+   "export": {
+    "title": "'+1",
+    "owner": "ops"
+   }
+  },
+  {
+   "id": 22,
+   "title": "-1",
+   "owner": "ops",
+   "rows": 9,
+   "restricted": false,
+   "export": {
+    "title": "'-1",
+    "owner": "ops"
+   }
+  },
+  {
+   "id": 23,
+   "title": "@x",
+   "owner": "ops",
+   "rows": 8,
+   "restricted": false,
+   "export": {
+    "title": "'@x",
+    "owner": "ops"
+   }
+  },
+  {
+   "id": 24,
+   "title": "=cmd|'/c calc'!A0",
+   "owner": "ops",
+   "rows": 25,
+   "restricted": false,
+   "export": {
+    "title": "'=cmd|'/c calc'!A0",
+    "owner": "ops"
+   }
+  },
+  {
+   "id": 25,
+   "title": "=HYPERLINK(\"http://x\",\"y\")",
+   "owner": "ops",
+   "rows": 5,
+   "restricted": false,
+   "export": {
+    "title": "'=HYPERLINK(\"http://x\",\"y\")",
+    "owner": "ops"
+   }
+  },
+  {
+   "id": 26,
+   "title": "\t=1+1",
+   "owner": "ops",
+   "rows": 9,
+   "restricted": false,
+   "export": {
+    "title": "\t=1+1",
+    "owner": "ops"
+   }
+  }
+ ]
+}
