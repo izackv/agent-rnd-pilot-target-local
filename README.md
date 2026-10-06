@@ -1,6 +1,6 @@
-# agent-rnd-pilot-target
+# agent-rnd-pilot-target-local
 
-**Disposable sandbox** for the Agent Team R&D Platform pilot. Agent teams work on this repo
+**Disposable sandbox** for the Agent Team R&D Platform pilot — **Phase 2b local-AI comparison copy** (same baseline, same gate, agents on OpenCode + local vLLM). Agent teams work on this repo
 during trials; the control repo (`agent-rnd-control`, private) owns the plan, policies and
 results. This repo is public only so that GitHub merge rules can be enforced on it (Free plan).
 
