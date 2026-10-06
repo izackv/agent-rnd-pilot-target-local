@@ -51,7 +51,7 @@ def parse_records(data: bytes) -> list[list[str]]:
 
 def parse_saved(data: bytes) -> list[list[str]]:
     assert data.startswith(BOM), "button download must carry the D-3 client-side BOM"
-    return parse_records(data[len(BOM):])
+    return parse_records(data[len(BOM) :])
 
 
 def open_page(base_url: str, browser: Browser) -> tuple[object, Page]:
@@ -171,10 +171,13 @@ def test_j03_api_role_set_headers_and_no_bom(base_url: str, browser: Browser) ->
 
         # parity rule (no header ⇒ viewer set) through the same stack
         r_v = context.request.get(base_url + "/api/reports.csv")
-        ids_v = [rec[0] for rec in list(csv.reader(
-            io.StringIO(r_v.body().decode("utf-8"), newline=""), strict=True))[1:]]
-        ids_json = [str(x["id"]) for x in
-                    context.request.get(base_url + "/api/reports").json()]
+        ids_v = [
+            rec[0]
+            for rec in list(
+                csv.reader(io.StringIO(r_v.body().decode("utf-8"), newline=""), strict=True)
+            )[1:]
+        ]
+        ids_json = [str(x["id"]) for x in context.request.get(base_url + "/api/reports").json()]
         assert ids_v == ids_json == VIEWER_IDS
     finally:
         context.close()
@@ -187,20 +190,20 @@ def test_j04_direct_navigation_downloads_the_viewer_file(base_url: str, browser:
     context = browser.new_context(accept_downloads=True)
     page = context.new_page()
     try:
-            with page.expect_download() as info:
-                try:  # an `attachment` navigation ends as a download, not a "load"
-                    page.goto(base_url + "/api/reports.csv")  # no X-Role on navigation
-                except Error:
-                    pass
-            name, saved = info.value.suggested_filename, Path(str(info.value.path())).read_bytes()
-            assert NAME_RE.match(name), name
-            # D-3/C-10, third pin: a NAVIGATION download is the raw server body —
-            # byte-equal to the API response, no BOM (the BOM lives only in the Blob).
-            assert not saved.startswith(BOM)
-            assert saved == api_bytes(context, base_url) == VIEWER_FILE_BYTES
-            for rec in parse_records(saved)[1:]:
-                assert not RESTRICTED_ROW_FIELD_VALUES & set(rec)
-            assert [rec[0] for rec in parse_records(saved)[1:]] == VIEWER_IDS
+        with page.expect_download() as info:
+            try:  # an `attachment` navigation ends as a download, not a "load"
+                page.goto(base_url + "/api/reports.csv")  # no X-Role on navigation
+            except Error:
+                pass
+        name, saved = info.value.suggested_filename, Path(str(info.value.path())).read_bytes()
+        assert NAME_RE.match(name), name
+        # D-3/C-10, third pin: a NAVIGATION download is the raw server body —
+        # byte-equal to the API response, no BOM (the BOM lives only in the Blob).
+        assert not saved.startswith(BOM)
+        assert saved == api_bytes(context, base_url) == VIEWER_FILE_BYTES
+        for rec in parse_records(saved)[1:]:
+            assert not RESTRICTED_ROW_FIELD_VALUES & set(rec)
+        assert [rec[0] for rec in parse_records(saved)[1:]] == VIEWER_IDS
     finally:
         context.close()
 
@@ -229,8 +232,7 @@ def test_status_failure_copy_only_on_click(base_url: str, browser: Browser) -> N
 
 def test_status_404_uses_the_unavailable_copy(base_url: str, browser: Browser) -> None:
     def not_yet(route: Route) -> None:
-        route.fulfill(status=404, content_type="application/json",
-                      body='{"detail":"Not Found"}')
+        route.fulfill(status=404, content_type="application/json", body='{"detail":"Not Found"}')
 
     context, page = _status_page(base_url, browser, not_yet)
     try:
@@ -243,8 +245,9 @@ def test_status_404_uses_the_unavailable_copy(base_url: str, browser: Browser) -
 
 def test_status_error_shape_is_never_parsed_as_csv(base_url: str, browser: Browser) -> None:
     def boom(route: Route) -> None:
-        route.fulfill(status=500, content_type="text/plain; charset=utf-8",
-                      body="Internal Server Error")
+        route.fulfill(
+            status=500, content_type="text/plain; charset=utf-8", body="Internal Server Error"
+        )
 
     context, page = _status_page(base_url, browser, boom)
     downloaded: list[Download] = []
@@ -268,14 +271,19 @@ def test_adversarial_fixture_reaches_table_and_export(base_url: str, browser: Br
     def serve_json(route: Route) -> None:
         admin = route.request.headers.get("x-role") == "admin"
         visible = [r for r in records if admin or not r["restricted"]]
-        route.fulfill(status=200, content_type="application/json",
-                      body=json.dumps([{k: v for k, v in r.items() if k != "export"}
-                                       for r in visible]))
+        route.fulfill(
+            status=200,
+            content_type="application/json",
+            body=json.dumps([{k: v for k, v in r.items() if k != "export"} for r in visible]),
+        )
 
     def serve_csv(route: Route) -> None:
-        route.fulfill(status=200, content_type="text/csv; charset=utf-8",
-                      headers={"Content-Disposition": 'attachment; filename="reports.csv"'},
-                      body=csv_bytes)
+        route.fulfill(
+            status=200,
+            content_type="text/csv; charset=utf-8",
+            headers={"Content-Disposition": 'attachment; filename="reports.csv"'},
+            body=csv_bytes,
+        )
 
     context = browser.new_context(accept_downloads=True)
     page = context.new_page()
@@ -285,7 +293,8 @@ def test_adversarial_fixture_reaches_table_and_export(base_url: str, browser: Br
     try:
         page.locator("select#role").select_option("admin")
         page.wait_for_function(
-            f"document.querySelectorAll('#reports tbody tr').length === {len(records)}")
+            f"document.querySelectorAll('#reports tbody tr').length === {len(records)}"
+        )
         # the app text stays raw for the formula cell (§3.1 deviation note)
         expect(page.locator("#reports tbody tr[data-id='20'] td").nth(1)).to_have_text("=1+1")
 

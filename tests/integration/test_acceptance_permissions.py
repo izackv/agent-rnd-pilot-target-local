@@ -126,9 +126,14 @@ def test_permission_matrix_row(case: str) -> None:
 def test_matrix_case_labels_match_plan_expectations_where_frozen() -> None:
     # Rows the plan pins as viewer-default traps (P-1, P-2, P-4…P-7): explicit set
     # equality, independent of the parity rule above (acceptance-plan §2 table).
-    for kw in ({}, {"headers": {"X-Role": "viewer"}}, {"headers": {"X-Role": "ADMIN"}},
-               {"headers": {"X-Role": "admin "}}, {"headers": {"X-Role": " admin"}},
-               {"headers": {"X-Role": ""}}):
+    for kw in (
+        {},
+        {"headers": {"X-Role": "viewer"}},
+        {"headers": {"X-Role": "ADMIN"}},
+        {"headers": {"X-Role": "admin "}},
+        {"headers": {"X-Role": " admin"}},
+        {"headers": {"X-Role": ""}},
+    ):
         assert csv_ids(get_csv(**kw).content) == VIEWER_IDS
     assert csv_ids(get_csv(headers={"X-Role": "admin"}).content) == ADMIN_IDS
 

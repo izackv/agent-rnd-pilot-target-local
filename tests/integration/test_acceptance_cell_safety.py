@@ -186,7 +186,7 @@ def test_record_terminator_profile(adversarial) -> None:
     body = admin_csv()
     assert body.endswith(b"\r\n")
     outside_quoted = re.sub(rb'"[^"]*(?:""[^"]*)*"', b"Q", body)
-    assert re.fullmatch(rb'(?:[^\r\n]*\r\n)+', outside_quoted), (
+    assert re.fullmatch(rb"(?:[^\r\n]*\r\n)+", outside_quoted), (
         "every unquoted line break must be a CRLF record terminator"
     )
 
